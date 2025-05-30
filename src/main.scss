@@ -1,0 +1,111 @@
+//Bootstrap Icons
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons";
+
+// Definición de variables
+$font-primary: 'Inter', sans-serif;
+$color-black: black;
+$color-white: white;
+$color-gray: #757575;
+$color-light-gray: rgb(241, 238, 238);
+
+// Estilos de navegación
+.topnav {
+  width: 100%;
+  padding: 1rem;
+  background-color: $color-white;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    img {
+      width: 30px;
+      height: auto;
+    }
+  }
+  .nav-center {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin: 0 1rem;
+  }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .button_1 {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: $color-black;
+    
+    i {
+      color: $color-gray;
+      font-size: 1.2rem;
+    }
+  }
+
+  .inicio {
+    background-color: $color-black;
+    color: $color-white;
+  }
+
+  .buscar {
+    background-color: $color-light-gray;
+    color: $color-gray;
+    flex-grow: 1;
+    text-align: start;
+    gap: 19px;
+    min-width: 200px;
+    max-width: 100%;
+  }
+
+  .btn_circle {
+    text-decoration: none;
+    color: $color-gray;
+    background-color: $color-light-gray;
+    border-radius: 50%;
+    padding: 8px 12px;
+  }
+
+  .icon {
+    display: none;
+    font-size: 1.5rem;
+    color: $color-gray;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .topnav {
+    flex-wrap: nowrap;
+
+    .nav-left {
+      .button_1 {
+        display: none;
+      }
+    }
+
+    .nav-right {
+      .button_1 {
+        display: none;
+      }
+    }
+  }
+}
+
+// Estilos base
+body {
+  font-family: $font-primary;
+  margin: 0;
+  padding: 0;
+}
