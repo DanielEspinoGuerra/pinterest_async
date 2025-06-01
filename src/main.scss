@@ -2,14 +2,17 @@
 $bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
 @import "../node_modules/bootstrap-icons/font/bootstrap-icons";
 
-// Definición de variables
-$font-primary: 'Inter', sans-serif;
-$color-black: black;
-$color-white: white;
-$color-gray: #757575;
-$color-light-gray: rgb(241, 238, 238);
+// Variables
+@import "./styles/_variables.scss";
 
-// Estilos de navegación
+// Base
+body {
+  font-family: $font-primary;
+  margin: 0;
+  padding: 0;
+}
+
+// Header
 .topnav {
   width: 100%;
   padding: 1rem;
@@ -40,7 +43,7 @@ $color-light-gray: rgb(241, 238, 238);
     gap: 10px;
   }
   
-  .button_1 {
+  .navButton {
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 30px;
@@ -90,22 +93,15 @@ $color-light-gray: rgb(241, 238, 238);
     flex-wrap: nowrap;
 
     .nav-left {
-      .button_1 {
+      .navButton {
         display: none;
       }
     }
 
     .nav-right {
-      .button_1 {
+      .navButton {
         display: none;
       }
     }
   }
-}
-
-// Estilos base
-body {
-  font-family: $font-primary;
-  margin: 0;
-  padding: 0;
 }
