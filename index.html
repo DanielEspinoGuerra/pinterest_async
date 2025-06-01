@@ -16,7 +16,13 @@
           <a href="#" class="navButton">Crear</a>
         </div>
         <div class="nav-center">
-          <a href="#" class="navButton buscar"><i class="bi bi-search"></i>Buscar</a>
+          <!-- Buscador -->
+          <div class="search-container">
+            <form class="search-form">
+              <i class="bi bi-search"></i>
+              <input type="text" name="search" class="search-input" placeholder="Buscar">
+            </form>
+          </div>
         </div>
         <div class="nav-right">
           <a href="#" class="navButton"><i class="bi bi-bell-fill"></i></a>
@@ -25,6 +31,9 @@
         </div>
       </nav>
     </header>
+    <main>
+      <div class="search-history"></div>
+    </main>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

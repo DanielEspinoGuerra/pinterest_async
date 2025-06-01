@@ -36,6 +36,31 @@ body {
     display: flex;
     align-items: center;
     margin: 0 1rem;
+
+    .search-container {
+      background-color: $color-light-gray;
+      border-radius: 30px;
+      padding: 8px 16px;
+      flex-grow: 1;
+      min-width: 200px;
+      max-width: 100%;
+
+      .search-form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+
+        .search-input {
+          border: none;
+          background: transparent;
+          width: 100%;
+          font-family: $font-primary;
+          color: $color-gray;
+          outline: none;
+        }
+      }
+    }
   }
   .nav-right {
     display: flex;
@@ -104,4 +129,9 @@ body {
       }
     }
   }
+}
+
+.search-history {
+  padding-left: 20px;
+  font-size: 14px;
 }
