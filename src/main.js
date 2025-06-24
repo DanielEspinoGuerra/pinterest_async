@@ -4,8 +4,9 @@ import { renderImageGrid } from './components/ImageGrid/ImageGrid.js';
 import { renderMessage } from './components/Message/Message.js';
 
 const API_KEY = 'TU_ACCESS_KEY_UNSPLASH'; // Reemplaza con tu clave
-const API_URL = 'https://api.unsplash.com/search/photos';
+const API_URL = 'https://api.unsplash.com/search/photos'; // URL de la API de Unsplash
 
+// Contenedor principal donde se mostrarán las imágenes y los mensajes
 const main = document.querySelector('main');
 main.innerHTML = `
   <div id="message-container"></div>
