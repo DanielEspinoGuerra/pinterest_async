@@ -113,6 +113,12 @@ body {
   }
 }
 
+.image-grid {
+  column-count: 5;
+  column-gap: 20px;
+  padding: 30px 20px;
+}
+
 @media screen and (max-width: 700px) {
   .topnav {
     flex-wrap: nowrap;
@@ -129,9 +135,7 @@ body {
       }
     }
   }
-}
 
-.search-history {
-  padding-left: 20px;
-  font-size: 14px;
+  .image-grid { column-count: 2; }
+  .image-card { margin-bottom: 12px; }
 }
