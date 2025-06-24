@@ -52,6 +52,7 @@ async function handleSearch(event) {
     showResults(images);
     showMessage(`Búsqueda realizada: "${searchTerm}"`);
   } else {
+    // Si no se encontraron resultados, mostrar imágenes de gatos (distinto a searchAndShowGatos ya que se indica al usuario que no se encontraron resultados)
     images = await fetchImages('gatos');
     showResults(images);
     showMessage(`No se encontraron resultados para "${searchTerm}". Mostrando imágenes de "gatos". Prueba con otra palabra.`);
