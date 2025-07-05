@@ -4,7 +4,17 @@ import { renderImageGrid } from './components/ImageGrid/ImageGrid.js';
 import { renderMessage } from './components/Message/Message.js';
 
 const API_KEY = 'TU_ACCESS_KEY_UNSPLASH'; // Reemplaza con tu clave
-const API_URL = 'https://api.unsplash.com/search/photos'; // URL de la API de Unsplash
+const API_URL = 'https://api.unsplash.com/search/collections'; // URL de la API de Unsplash
+
+// Función para obtener la primera búsqueda guardada
+function getPrimeraBusqueda() {
+  return localStorage.getItem('primeraBusqueda');
+}
+
+// Función para guardar la primera búsqueda
+function setPrimeraBusqueda(busqueda) {
+  localStorage.setItem('primeraBusqueda', busqueda);
+}
 
 // Contenedor principal donde se mostrarán las imágenes y los mensajes
 const main = document.querySelector('main');
@@ -15,10 +25,10 @@ main.innerHTML = `
 const resultsContainer = document.getElementById('results-container');
 const messageContainer = document.getElementById('message-container');
 
-// Mostrar las imágenes
-function showResults(images) {
+// Mostrar las colecciones
+function showResults(collections) {
   resultsContainer.innerHTML = '';
-  resultsContainer.appendChild(renderImageGrid(images));
+  resultsContainer.appendChild(renderImageGrid(collections));
 }
 
 // Mostrar el mensaje
@@ -27,36 +37,51 @@ function showMessage(text) {
   messageContainer.appendChild(renderMessage(text));
 }
 
-// Obtener las imágenes
-async function fetchImages(query) {
+// Obtener las colecciones
+async function fetchCollections(query) {
   const res = await fetch(`${API_URL}?query=${encodeURIComponent(query)}&per_page=12&client_id=${API_KEY}`);
   const data = await res.json();
+  console.log(data.results.length + " colecciones encontradas");
+  console.log(data.total + " colecciones totales");
   return data.results;
 }
 
 // Buscar gatos por defecto al cargar la página
 async function searchAndShowGatos() {
-  const images = await fetchImages('gatos');
-  showResults(images);
+  const collections = await fetchCollections('gatos');
+  showResults(collections);
   showMessage('Búsqueda realizada: "gatos"');
 }
 
-// Buscar imágenes
+// Buscar colecciones
 async function handleSearch(event) {
   event.preventDefault();
   const searchInput = event.target.search;
   const searchTerm = searchInput.value.trim();
   if (!searchTerm) return;
 
-  let images = await fetchImages(searchTerm);
-  if (images.length > 0) {
-    showResults(images);
-    showMessage(`Búsqueda realizada: "${searchTerm}"`);
+  // Guardar la primera búsqueda del usuario si aún no se ha guardado
+  if (!getPrimeraBusqueda()) {
+    setPrimeraBusqueda(searchTerm);
+  }
+
+  let collections = await fetchCollections(searchTerm);
+  if (collections.length > 0) {
+    showResults(collections);
+    showMessage(`Búsqueda realizada: "${searchTerm}" ${collections.length} colecciones encontradas | `);
   } else {
-    // Si no se encontraron resultados, mostrar imágenes de gatos (distinto a searchAndShowGatos ya que se indica al usuario que no se encontraron resultados)
-    images = await fetchImages('gatos');
-    showResults(images);
-    showMessage(`No se encontraron resultados para "${searchTerm}". Mostrando imágenes de "gatos". Prueba con otra palabra.`);
+    // Si no se encontraron resultados, mostrar la primera búsqueda del usuario
+    const primeraBusqueda = getPrimeraBusqueda();
+    if (primeraBusqueda && primeraBusqueda !== searchTerm) {
+      collections = await fetchCollections(primeraBusqueda);
+      showResults(collections);
+      showMessage(`No se encontraron resultados para "${searchTerm}". Mostrando colecciones de "${primeraBusqueda}". Prueba con otra palabra.`);
+    } else {
+      // Si no hay primera búsqueda o es la misma, mostrar gatos como última opción por defecto
+      collections = await fetchCollections('gatos');
+      showResults(collections);
+      showMessage(`No se encontraron resultados para "${searchTerm}". Mostrando colecciones de "gatos". Prueba con otra palabra.`);
+    }
   }
   // Limpiar el input después de la búsqueda
   searchInput.value = '';

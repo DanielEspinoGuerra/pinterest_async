@@ -1,8 +1,8 @@
 import { createImageCard } from '../ImageCard/ImageCard.js';
 
-export function renderImageGrid(images) {
+export function renderImageGrid(collections) {
   const grid = document.createElement('div');
   grid.className = 'image-grid';
-  images.forEach(img => grid.appendChild(createImageCard(img)));
+  collections.forEach(collection => grid.appendChild(createImageCard(collection)));
   return grid;
 }

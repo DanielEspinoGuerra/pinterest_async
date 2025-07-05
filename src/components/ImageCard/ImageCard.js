@@ -1,7 +1,7 @@
 import './ImageCard.scss';
 
-export function createImageCard(image) {
-    const date = new Date(image.created_at).toLocaleDateString('es-ES');
+export function createImageCard(collection) {
+    const date = new Date(collection.published_at).toLocaleDateString('es-ES');
     // Números simulados para cámara y likes
     const cameraCount = Math.floor(Math.random() * 100) + 1;
     const likesCount = Math.floor(Math.random() * 100) + 1;
@@ -9,7 +9,7 @@ export function createImageCard(image) {
     card.className = 'image-card';
     card.innerHTML = `
         <div class="image-wrapper">
-            <img src="${image.urls.small}" alt="${image.alt_description || 'Imagen'}">
+            <img src="${collection.cover_photo.urls.small}" alt="${collection.cover_photo.description || collection.title || 'Colección'}">
             <div class="badge badge-camera">
                 <i class="bi bi-camera"></i>
                 <span>${cameraCount}</span>
@@ -22,11 +22,11 @@ export function createImageCard(image) {
                 <button class="visit-btn">Visitar</button>
             </div>
             <div class="user-avatar-wrapper">
-                <img class="user-avatar" src="${image.user.profile_image.medium}" alt="${image.user.name}">
+                <img class="user-avatar" src="${collection.user.profile_image.medium}" alt="${collection.user.name}">
             </div>
         </div>
         <div class="image-info">
-            <span class="user-name">${image.user.name}</span>
+            <span class="user-name">${collection.user.name}</span>
             <span class="image-date">${date}</span>
         </div>
     `;
